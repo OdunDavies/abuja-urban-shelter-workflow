@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Urban Shelter — Lead + Inspection Workflow (Unofficial Prototype)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+<div class="watermark">UNOFFICIAL PROTOTYPE prepared for Urban Shelter Limited · Not connected to their systems</div>
+<header class="top">
+<div class="brand"><span class="mark">US</span><div><strong>Urban Shelter</strong><small>Lead &amp; Inspection Workflow · Demo</small></div></div>
+<nav><a href="#home">Home</a><a href="#qualify">Qualify</a><a href="#listings">Listings</a><a href="#inspect">Inspection</a><a href="#admin">Admin</a><a href="#workflow">Workflow</a></nav>
+</header>
+<section id="home" class="hero">
+<p class="kicker">Proposal demo · Abuja / FCT</p>
+<h1>Stop losing serious buyers after 6pm because the website only says “submit”.</h1>
+<p class="lede">Urban Shelter has delivered estates across Life Camp, Guzape, Kubwa, Kyami and Garki since 1991. The live site still shows brochure listings dated years ago, a generic inquiry form, and no inspection calendar, lead score, or after-hours reply.</p>
+<div class="cta-row"><a class="btn primary" href="#qualify">Capture a sample lead</a><a class="btn ghost" href="#workflow">See the workflow</a></div>
+<div class="stats"><div><b>3-touch</b><span>nurture if no reply</span></div><div><b>Hot / Warm / Cold</b><span>score on every inquiry</span></div><div><b>T-24h / T-2h</b><span>inspection reminders</span></div><div><b>Diaspora-ready</b><span>video tour + document pack</span></div></div>
+</section>
+<section class="pain">
+<h2>What we observed on urbanshelter.com</h2>
+<ul>
+<li>Featured inventory still labelled “11 years ago” and “3 years ago” — buyers cannot tell what is actually available in 2026.</li>
+<li>Contact path is a static “Real Estate Inquiry Form” with no WhatsApp prefill, no chatbot, no viewing slot picker.</li>
+<li>No filters for district, budget, buy vs invest, or payment plan — sales still re-asks the same FAQs by phone.</li>
+<li>No public after-hours capture. Diaspora inquiries that land on Sunday sit until the office opens.</li>
+</ul>
+</section>
+<section id="qualify" class="panel">
+<div class="split">
+<div>
+<h2>1. Lead capture + instant qualifier</h2>
+<form id="leadForm">
+<label>Full name<input name="name" required placeholder="Chioma Adeyemi" /></label>
+<label>WhatsApp / phone<input name="phone" required /></label>
+<label>Email<input name="email" type="email" /></label>
+<label>I want to<select name="intent"><option value="buy">Buy to live</option><option value="invest">Invest / land bank</option><option value="rent">Rent</option><option value="commercial">Commercial space</option></select></label>
+<label>Preferred district<select name="district"><option>Life Camp</option><option>Guzape</option><option>Kubwa</option><option>Kyami</option><option>Garki</option><option>Jabi</option><option>Any prime Abuja</option></select></label>
+<label>Budget band<select name="budget"><option value="15">Under ₦20m</option><option value="40">₦20m – ₦60m</option><option value="80">₦60m – ₦150m</option><option value="200">₦150m – ₦400m</option><option value="500">₦400m+</option></select></label>
+<label>Timeline<select name="timeline"><option value="now">Ready this month</option><option value="90">Next 90 days</option><option value="year">This year</option><option value="research">Just researching</option></select></label>
+<label>Buyer type<select name="buyer"><option value="local">In Abuja</option><option value="lagos">Lagos / other Nigeria</option><option value="diaspora">Diaspora</option></select></label>
+<button type="submit" class="btn primary">Qualify this lead</button>
+</form>
+</div>
+<aside id="qualifier" class="card empty"><h3>AI qualifier output</h3><p>Submit the form to score the lead and draft the first WhatsApp reply.</p></aside>
+</div>
+</section>
+<section id="listings" class="panel alt">
+<h2>2. Structured listings (sample from public Urban Shelter projects)</h2>
+<p class="note">Sample cards only. Prices and availability must be confirmed. Not live inventory.</p>
+<div class="filters"><button data-filter="all" class="on">All</button><button data-filter="Life Camp">Life Camp</button><button data-filter="Guzape">Guzape</button><button data-filter="Kubwa">Kubwa</button><button data-filter="Kyami">Kyami</button><button data-filter="Garki">Garki</button></div>
+<div id="listingGrid" class="grid"></div>
+</section>
+<section id="inspect" class="panel">
+<h2>3. Request inspection</h2>
+<form id="inspectForm" class="inspect">
+<label>Name<input name="name" required /></label>
+<label>WhatsApp<input name="phone" required /></label>
+<label>Project<select name="project"><option>The Bellavue Residences — Life Camp</option><option>The Hills Residences — Guzape</option><option>Brick City Valley — Kubwa</option><option>Urban Shelter Estate — Kyami</option><option>Urban Shelter Square — Garki</option></select></label>
+<label>Preferred date<input name="date" type="date" required /></label>
+<label>Slot<select name="slot"><option>09:00 – 10:00</option><option>11:00 – 12:00</option><option>14:00 – 15:00</option><option>16:00 – 17:00</option><option>Video tour (diaspora)</option></select></label>
+<button type="submit" class="btn primary">Book inspection slot</button>
+</form>
+<div id="inspectResult"></div>
+</section>
+<section id="admin" class="panel alt">
+<h2>4. Admin-lite — incoming leads</h2>
+<div class="table-wrap"><table><thead><tr><th>Time</th><th>Name</th><th>District</th><th>Intent</th><th>Score</th><th>Next action</th></tr></thead><tbody id="leadTable"></tbody></table></div>
+</section>
+<section id="workflow" class="panel">
+<h2>5. Automation spec</h2>
+<ol class="flow">
+<li><b>Trigger:</b> new form / Meta lead / WhatsApp first message.</li>
+<li><b>Score:</b> timeline + budget + district + diaspora flag → Hot / Warm / Cold.</li>
+<li><b>Instant:</b> qualifier reply + matching estate + viewing slot.</li>
+<li><b>+4 hours:</b> payment-plan / title FAQ if no reply.</li>
+<li><b>+48 hours:</b> assign to desk.</li>
+<li><b>Inspection booked:</b> T-24h and T-2h reminders.</li>
+<li><b>Weekly digest:</b> leads waiting to sales@urbanshelter.com.</li>
+</ol>
+<div class="connect"><h3>Prototype only</h3><p>Nothing is plugged into Urban Shelter email, CRM, or WhatsApp yet. Next connect: WhatsApp Business API, Google Sheets or Airtable, sales@ inbox, Meta lead ads.</p></div>
+</section>
+<footer><p>Unofficial prototype prepared for Urban Shelter Limited by Odunayo Davies Idowu · IT Support &amp; Automation · Abuja</p></footer>
+<script src="app.js"></script>
+</body></html>
